@@ -7,31 +7,6 @@ DB_CONN="mysql -h ${DB_SERVER} -u ${DB_USER} ${DB_NAME}"
 
 _JSON="{}"
 
-#SQL="
-#    SELECT 
-#        JSON_OBJECT(
-#            group_name, 
-#            JSON_OBJECT(
-#                'hosts', 
-#                JSON_ARRAYAGG(host_name),
-#                'vars', 
-#                (
-#                    SELECT
-#                        JSON_OBJECTAGG(
-#                            ansible_var_name,
-#                            ansible_var_value
-#                        )
-#                    FROM ansible_group_vars 
-#                    WHERE ansible_group_id=1
-#                )
-#            )
-#        ) as groups
-#    FROM ansible_hosts 
-#    LEFT JOIN ansible_groups 
-#    ON ansible_hosts.ansible_group_id = ansible_groups.ID 
-#    GROUP BY group_name
-#;"
-#    #WHERE group_name = 'linux' 
 _groups_sql() {
     echo "
     SELECT 
